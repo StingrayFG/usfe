@@ -1,0 +1,19 @@
+* {
+  box-sizing: border-box;
+}
+
+.div-full {
+  min-height: 100vh;
+  height: 100%;
+
+  display: grid;
+}
+
+.message {
+  place-self: center;
+
+  color: rgb(227, 227, 227);
+  font-size: 64px;
+  font-family: Arial;
+  font-weight: 500;
+}
