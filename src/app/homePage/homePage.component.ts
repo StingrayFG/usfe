@@ -14,12 +14,33 @@ import axios from 'axios';
 export class HomePageComponent {
   newLink = '';
   lastOriginalLink = '';
-
+  
+  showingMessage = false;
+  message = ''
 
   originalLinkControl = new FormControl('', [
     Validators.required,
     Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')
   ])
+
+  handleKey(e: any): void {
+    if(e.keyCode === 13) {        
+      this.createRecord();    
+    }
+  }  
+  copyLink(): void {
+    if (this.newLink) {
+      this.showMessage('Copied!')
+      navigator.clipboard.writeText(this.newLink);
+    }
+  }
+
+  async showMessage(msg: string) {
+    this.message = msg;
+    this.showingMessage = true;
+    await new Promise(res => setTimeout(res, 1500));
+    this.showingMessage = false;
+  }
 
   async createRecord() {
     console.log(this.originalLinkControl)
@@ -29,13 +50,14 @@ export class HomePageComponent {
         await axios.post('http://localhost:5200/record/create', {originalLink: this.originalLinkControl.value})
         .then(res => {
           this.newLink = 'localhost:4200' + '/' + res.data;
+          this.lastOriginalLink = this.originalLinkControl.value!;
         })
         .catch(err => {
           this.newLink = 'Something went wrong'
         })
       }
     } else {
-      this.newLink = 'Invalid link'
+      this.showMessage('Enter a correct link')
     }
   }
 }

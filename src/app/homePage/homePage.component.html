@@ -1,12 +1,13 @@
 <div class='div-full'>
   <div class='div-central'>
     <div class='div-input'>
-      <input class='input-link font-default' placeholder='Enter the link here' type='text' [formControl]='originalLinkControl'>
+      <input class='input-link font-default' placeholder='Enter the link here' type='text' [formControl]='originalLinkControl' (keyup)='handleKey($event)'>
       <button class='button-confirm' (click)='createRecord()'>Shorten URL</button>  
     </div>
     
-    <button class='div-output'>
-      <div class='div-link font-default'>{{newLink}}</div>
+    <button class='div-output' (click)='copyLink()' [class]="newLink? 'hover-dark' : ''">
+      <div class='div-link font-default' [style.opacity]="showingMessage ? '0' : '100'">{{newLink}}</div>
+      <div class='div-message font-default' [style.opacity]="showingMessage ? '100' : '0'">{{message}}</div>
     </button>
 
   </div>

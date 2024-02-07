@@ -79,10 +79,23 @@
   border-radius: 16px;
 
   display: grid;
+  overflow: hidden;
+}
+
+.hover-dark:hover {
+  background-color: rgb(194, 194, 194);
 }
 
 .div-link {
   place-self: center;
+
+  transition-property: all;
+  transition-duration: 500ms;
+}
+
+.div-message {  
+  place-self: center;
+  position: absolute;
 
   transition-property: all;
   transition-duration: 500ms;
