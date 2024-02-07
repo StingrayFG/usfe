@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import axios from 'axios';
 
 @Component({
@@ -12,19 +12,30 @@ import axios from 'axios';
 })
 
 export class HomePageComponent {
-  uuid = '';
   newLink = '';
+  lastOriginalLink = '';
 
-  originalLinkControl = new FormControl('');
 
+  originalLinkControl = new FormControl('', [
+    Validators.required,
+    Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')
+  ])
 
   async createRecord() {
-    if (this.originalLinkControl.value && !this.newLink) {
-      this.newLink = '...'
-      await axios.post('http://localhost:5200/record/create', {originalLink: this.originalLinkControl.value})
-      .then(res => {
-        this.newLink = 'localhost:4200' + '/' + res.data;
-      })
+    console.log(this.originalLinkControl)
+    if (this.originalLinkControl.status === 'VALID') {
+      if (this.originalLinkControl.value !== this.lastOriginalLink) {
+        this.newLink = '...'
+        await axios.post('http://localhost:5200/record/create', {originalLink: this.originalLinkControl.value})
+        .then(res => {
+          this.newLink = 'localhost:4200' + '/' + res.data;
+        })
+        .catch(err => {
+          this.newLink = 'Something went wrong'
+        })
+      }
+    } else {
+      this.newLink = 'Invalid link'
     }
   }
 }
