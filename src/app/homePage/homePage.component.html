@@ -1,8 +1,14 @@
 <div class='div-full'>
   <div class='div-central'>
-    <input class='link-input' type='text' [formControl]='originalLinkControl'>
-    <button class='confirm-button' (click)='createRecord()'>Confirm</button>
-    <button class='link-output'>{{newLink}}</button>
+    <div class='div-input'>
+      <input class='input-link font-default' placeholder='Enter the link here' type='text' [formControl]='originalLinkControl'>
+      <button class='button-confirm' (click)='createRecord()'>Shorten URL</button>  
+    </div>
+    
+    <button class='div-output'>
+      <div class='div-link font-default'>{{newLink}}</div>
+    </button>
+
   </div>
 </div>
 
