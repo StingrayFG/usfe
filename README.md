@@ -1,5 +1,7 @@
 # Fusor
 
-Fusor is a url shortening project built with Angular and Golang.
+Fusor is a url shortening project built with Angular, SCSS, Golang, MariaDB.
 
-Includes one click shortened url generation.
+# Features
+- One click shortened url generation.
+- Mobile devices support.
