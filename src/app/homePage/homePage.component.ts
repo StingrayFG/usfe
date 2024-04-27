@@ -4,7 +4,7 @@ import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import axios from 'axios';
 
 @Component({
-  selector: 'app-page',
+  selector: 'app-home-page',
   standalone: true,
   imports: [RouterOutlet, ReactiveFormsModule],
   templateUrl: './homePage.component.html',

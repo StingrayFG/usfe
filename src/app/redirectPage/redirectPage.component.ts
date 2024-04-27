@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import axios from 'axios';
 
 @Component({
-  selector: 'app-page',
+  selector: 'app-redirect-page',
   standalone: true,
   imports: [RouterOutlet],
   templateUrl: './redirectPage.component.html',
